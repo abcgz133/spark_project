@@ -27,16 +27,17 @@ flowchart TD;
     C-->D;
 ```
 
-```mermaid
-flowchart TD;
-     A-->B;
-     A-->C;
-     B-->D;
-     C-->D;
-```
+
 
 
 ## 3.the flowchart of the system
+```mermaid
+flowchart TD;
+     A(booking system-->B;
+     B-->C;
+     C-->D;
+```
+
 
 ```
     graph LR
