@@ -26,7 +26,13 @@ Kafka is a distributed publish subscribe message system with high throughput . B
 	     B-->D;
 	     C-->D;
 	```
-
+```mermaid
+flowchart TD;
+     A-->B;
+     A-->C;
+     B-->D;
+     C-->D;
+```
 
 
 ## 3.the flowchart of the system
