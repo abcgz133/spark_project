@@ -39,10 +39,10 @@ flowchart TD;
 ## 3.the flowchart of the system
 
 ```
-graph LR
-A(booking system)-->B(Kafka)
-B(kafka)-->C(Spark Streaming)
-C(Spark Streaming)-->D(Redis)
+    graph LR
+        A(booking system)-->B(Kafka)
+        B(kafka)-->C(Spark Streaming)
+        C(Spark Streaming)-->D(Redis)
 
 ```
 
