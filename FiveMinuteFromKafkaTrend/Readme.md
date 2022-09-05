@@ -21,8 +21,8 @@ Kafka is a distributed publish subscribe message system with high throughput . B
 ## 3.1 new
 ```mermaid
 flowchart TD;
-    A-->B;
-    A-->C;
+    A(booking system)-->B;
+    A(booking system)-->C;
     B-->D;
     C-->D;
 ```
@@ -31,12 +31,7 @@ flowchart TD;
 
 
 ## 3.the flowchart of the system
-```mermaid
-flowchart TD;
-     A(booking system-->B;
-     B-->C;
-     C-->D;
-```
+
 
 
 ```
