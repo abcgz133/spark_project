@@ -18,14 +18,11 @@ the system includes these functions:
 ### the advantages of Kafka：
 Kafka is a distributed publish subscribe message system with high throughput . Based on zookeeper, it has important functions in real-time computing system.
 ##### 
-## 3.the flowchart of the system
-
-```
-graph LR
-A(booking system)-->B(Kafka)
-B(kafka)-->C(Spark Streaming)
-C(Spark Streaming)-->D(Redis)
-
+## 3.1 new
+```mermaid
+flowchart LR
+    A(Simulation System)-->| MockData| B(Kafka) --> C(Spark Streaming)
+    
 ```
 
 ## 4. Project resource structure
