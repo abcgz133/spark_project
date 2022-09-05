@@ -32,32 +32,34 @@ C(Spark Streaming)-->D(Redis)
 
 
 ```
-       
+E:.                                          
+├─.idea                                      
+│  └─codeStyles                              
+├─datas                                      
+├─output
+├─spark-receiver
+│  └─receivedBlockMetadata
 ├─src
 │  ├─main
 │  │  ├─java
 │  │  │  └─cn
-│  │  │      └─itcast
+│  │  │      └─aishengying
 │  │  │          ├─createorder
-│  │  │          │      PaymentInfo.java
-│  │  │          │      PaymentInfoProducer.java
-│  │  │          │      
 │  │  │          └─util
-│  │  │                  JedisUtil.java
-│  │  │                  
 │  │  ├─resources
-│  │  │      redis.properties
-│  │  │      
 │  │  └─scala
-│  │      └─cn
-│  │          └─itcast
-│  │              └─processdata
-│  │                      RedisClient.scala
-│  │                      StreamingProcessdata.scala
-│  │                      
+│  │      └─sparkProject
+│  │          ├─Best10Clicking_Booking_Paying
+│  │          ├─BlackList_filter_create
+│  │          ├─First2cities_in_3_category_in_eachArea
+│  │          ├─First5goodUsers_in_best10Categories_Analysis
+│  │          ├─FiveMinuteFromKafkaTrend
+│  │          └─PageFlows_covertingRate
 │  └─test
 │      └─java
 └─target
+    └─classes
+       
 
 ```
 
@@ -77,8 +79,6 @@ JDK: version 1.8
 ### kafka 
 version: 2.11-2.000. 
 
-### Redis
-version: 3.2.8. It is responsible to store the dynamic computed data
 
 ## 6. Code description
 ### 6.1 generating the simulation mock data and sending the data to Kafka
