@@ -19,13 +19,14 @@ the system includes these functions:
 Kafka is a distributed publish subscribe message system with high throughput . Based on zookeeper, it has important functions in real-time computing system.
 ##### 
 ## 3.1 new
-	```mermaid
-	flowchart TD;
-	     A-->B;
-	     A-->C;
-	     B-->D;
-	     C-->D;
-	```
+```mermaid
+flowchart TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
+
 ```mermaid
 flowchart TD;
      A-->B;
