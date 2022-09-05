@@ -21,7 +21,8 @@ Kafka is a distributed publish subscribe message system with high throughput . B
 ## 3.1 new
 ```mermaid
 flowchart LR;-->
-    A(booking system)-->B(Kafka)-->C(Spark Streaming);
+    A(booking system)-->B(Kafka);
+    B(Kafka)-->C(Spark Streaming);
 ```
 
 
