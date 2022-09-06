@@ -5,7 +5,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 object First5goodUsers_in_best10Categories_Analysis {
   /*
-    1. define the method(best10Category) to get the best 20 category
+    1. define the method(best10Category) to get the best 10 category
     2. parse the textFile to data
     3. filter the data by data whether are contained in best10Categories and is "click" transaction
     4. to map the data to a Tuple[(category_id, session_id),1L] and reduce the Tuple to ((category_id,sessionId), sum)
@@ -56,13 +56,13 @@ object First5goodUsers_in_best10Categories_Analysis {
       itr => {
         itr.toList.sortBy(_._2)(Ordering.Long.reverse).take(5)
       }
-    ).collect().foreach(x => println(s"category_id:${x._1},session_id&count_ordered_in_first5: ${x._2}"))
+    ).collect().foreach(x => println(s"category_id:${x._1},first 5 session_ids & total clicking number in each session_id: ${x._2}"))
 
     sc.stop()
   }
 
 
-  //  define the method(top20Category) to get the best 20 category
+  //  define the method(top20Category) to get the best 10 category
   def best10Categories(dataRDD: RDD[String]): Array[String] = {
     /*
         1. parse the data, when click ,then map to a Tuple:  (cid, (1,0,0))

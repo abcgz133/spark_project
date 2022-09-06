@@ -75,7 +75,7 @@ object Best10Clicking_Booking_Paying {
 
     println("the best 10 clicking_booking_paying:")
     //  6. print in the console
-    sortedList.take(10).foreach(x => println(s"category_id:${x.cid},clicking_cnt:${x.click_cnt} booking:${x.book_cnt} paying_cnt:${x.pay_cnt} "))
+    sortedList.take(10).foreach(x => println(s"category_id:${x.cid}, (clicking_cnt:${x.click_cnt} booking:${x.book_cnt} paying_cnt:${x.pay_cnt} )"))
     sc.stop()
   }
 

@@ -16,7 +16,7 @@ the system includes these functions:
 3. Comparing Hadoop, which saves processing data on disk, Spark saves data in memory when processing data. Thus, the computational efficiency has beengreatly improved.
 
 ### the advantages of Kafka：
-Kafka is a distributed publish subscribe message system with high throughput . Based on zookeeper, it has important functions in real-time computing system.
+Kafka is a distributed subscribe message system with high throughput . Based on zookeeper, it has important functions in real-time computing system.
 ##### 
 ## 3. flowchart of this project
 ```mermaid
@@ -56,7 +56,13 @@ E:.
 │      └─java
 └─target
     └─classes
-       
+       └─sparkProject
+          ├─Best10Clicking_Booking_Paying
+          ├─BlackList_filter_create
+          ├─First2cities_in_3_category_in_eachArea
+          ├─First5goodUsers_in_best10Categories_Analysis
+          ├─FiveMinuteFromKafkaTrend
+          └─PageFlows_covertingRate
 
 ```
 

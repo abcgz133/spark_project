@@ -69,6 +69,7 @@ object PageFlows_covertingRate {
       t => (t, 1L)
     ).reduceByKey(_ + _).collect().toMap
 
+    println("the rate of page_flow is ")
     var rank = 0
     consecutivePagesArray.map {
       case ((page1, page2), cnt) => {
@@ -77,7 +78,7 @@ object PageFlows_covertingRate {
       }
     }.toList.sortBy(_._2)(Ordering.Double.reverse).take(50).foreach(x => {
       rank += 1
-      println(s"the sorted rate of from page ${x._1._1} to page ${x._1._2} is ${x._2} and the rank ${rank} ")
+      println(s"the rate of from page ${x._1._1} to page ${x._1._2}: ${x._2} and the rank: ${rank} ")
     })
 
 

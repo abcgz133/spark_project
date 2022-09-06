@@ -17,12 +17,12 @@ object BlackList_filter_create {
   /*
     1. receive data from Kafka,
     2. transform the data to DStream and parse the data to a case class
-    3. select user_id from black_list, then filter the data where user_id is in the black_list
-    4. map the filtered data to ((day, user_id, ad_id),1)  and then reduce to count this data
-    the result is the count of ad clicked.
-    5. if count >20 then insert or update the blacklist
-    6. if count <=20, then update or insert into the user_ad_count ,
-    if the updated count >20, then insert or update the user_id into  black_list
+    3. select user_id from black_list, then filter the data if user_id is not in  the black_list
+    4. map the filtered data to ((day, user_id, ad_id),1)  and then reduce them to count the total number
+     of clicks to each advertise_id by each user_id in each day.
+    5. if counted_total_number >20 then insert or update the blacklist.
+    6. if counted_total_number <=20, then update or insert into the user_ad_count ,
+    if the updated counted_total_number >20, then insert or update the user_id into  black_list
 
      */
 
@@ -88,66 +88,70 @@ object BlackList_filter_create {
       }
     )
 
-    //reducedGroupedDstream: DStream[((String, String, String), Int)]
     reducedGroupedDstream.foreachRDD(
       rdd => {
-        rdd.foreach {
+        rdd.foreachPartition(
+          data => data.foreach {
 
-          case ((day, user_id, ad_id), count) => {
-            println(s"day: ${day} user_id:${user_id} ad_id:${ad_id} count:${count} ")
-            // if count <20, insert or update the user_ad_count
-            // then if the new counted > 20 then insert or update into
-            // the black_list
-            if (count < 20) {
-              val conn = JDBCUtil.getConnection
-              val sql1 =
-                """
-                  |insert into user_ad_count (day, user_id, ad_id, count) values (?,?,?,?)
-                  |on duplicate key
-                  |update count = count + ?
-                  |""".stripMargin
-              JDBCUtil.executeUpdate(conn, sql1, Array(day, user_id, ad_id, count, count))
+            case ((day, user_id, ad_id), count) => {
+              println(s"day: ${day} user_id:${user_id} ad_id:${ad_id} count:${count} ")
+              // if count <20, insert or update the user_ad_count
+              // then if the new counted > 20 then insert or update into
+              // the black_list
+              if (count < 20) {
+                val conn = JDBCUtil.getConnection
+                val sql1 =
+                  """
+                    |insert into user_ad_count (day, user_id, ad_id, count) values (?,?,?,?)
+                    |on duplicate key
+                    |update count = count + ?
+                    |""".stripMargin
+                JDBCUtil.executeUpdate(conn, sql1, Array(day, user_id, ad_id, count, count))
 
-              val sql2 =
-                """
-                  |select user_id from user_ad_count
-                  |where day = ?
-                  |and user_id = ?
-                  |and ad_id = ?
-                  |and count >= 20
-                  |""".stripMargin
-              val flag: Boolean = JDBCUtil.isExist(conn, sql2, Array(day, user_id, ad_id))
+                val sql2 =
+                  """
+                    |select user_id from user_ad_count
+                    |where day = ?
+                    |and user_id = ?
+                    |and ad_id = ?
+                    |and count >= 20
+                    |""".stripMargin
+                val flag: Boolean = JDBCUtil.isExist(conn, sql2, Array(day, user_id, ad_id))
 
-              if (flag) {
-                val sql3 =
+                if (flag) {
+                  val sql3 =
+                    """
+                      |insert into black_list (user_id) values (?)
+                      |on duplicate key
+                      |update user_id = ?
+                      |""".stripMargin
+                  JDBCUtil.executeUpdate(conn, sql3, Array(user_id, user_id))
+
+                }
+                conn.close()
+              } else {
+                // count >= 20
+                val conn = JDBCUtil.getConnection
+                val sql4 =
                   """
                     |insert into black_list (user_id) values (?)
                     |on duplicate key
                     |update user_id = ?
                     |""".stripMargin
-                JDBCUtil.executeUpdate(conn, sql3, Array(user_id, user_id))
-
+                JDBCUtil.executeUpdate(conn, sql4, Array(user_id, user_id))
+                conn.close()
               }
-              conn.close()
-            } else {
-              // count >= 20
-              val conn = JDBCUtil.getConnection
-              val sql4 =
-                """
-                  |insert into black_list (user_id) values (?)
-                  |on duplicate key
-                  |update user_id = ?
-                  |""".stripMargin
-              JDBCUtil.executeUpdate(conn, sql4, Array(user_id, user_id))
-              conn.close()
+
+
             }
 
-
           }
-
-        }
+        )
       }
     )
+
+    //reducedGroupedDstream: DStream[((String, String, String), Int)]
+
 
 
     ssc.start()

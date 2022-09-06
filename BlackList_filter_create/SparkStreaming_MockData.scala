@@ -8,14 +8,17 @@ import scala.collection.mutable.ListBuffer
 object SparkStreaming_MockData {
 
   def main(args: Array[String]): Unit = {
+    /*
+    1. to Generate simulation Mock data
+     formate: timestamp area city user_id ad_id
+     meaning: timestamp area city user_id,advertisement_id
+    2. to produce the data to Producer of Kafka, the topic is "aiShengYing"
+     */
 
-    // 生成模拟数据
-    // 格式 ：timestamp area city userid adid
-    // 含义： 时间戳   区域  城市 用户 广告
 
     // Application => Kafka => SparkStreaming => Analysis
     val prop = new Properties()
-    // 添加配置
+
     prop.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "hadoop01:9092")
     prop.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer")
     prop.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer")
@@ -33,8 +36,8 @@ object SparkStreaming_MockData {
         }
       )
       time += 1
-      println(s"time is ${time}. now begin to sleep 5 seconds")
-      Thread.sleep(5000)
+      println(s"time is ${time}. now begin to sleep 3 seconds")
+      Thread.sleep(3000)
     }
 
   }

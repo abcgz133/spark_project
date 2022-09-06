@@ -11,19 +11,13 @@ import scala.collection.mutable.ListBuffer
 object First2cities_in_3_category_in_eachArea {
   /*
     1. parse the textFile to table user_action, city_info and product_info
-    2. select all necessary data from a big table(named big_table1) that join these 3 tables.
-    3. select the areas, the products ,the rank , and the city_rate from the big_table1 group by
+    2. select all necessary data that join thove 3 tables(user_action, city_info and product_info) to form a big table(named big_table1).
+  	3. to count and order the city_rate by extends the UDAF of Aggregator to form the rate of first 2 cities.
+    4. to select the areas, the products ,the rank , and the city_rate from the big_table1 group by
     area, product_name to form an another big table(named big_table2)
-    4. to count and order the city_rate by extends the UDAF of Aggregator
     5. to select * from big_table2 where the rank <=3 to form an another big table(named big_table3)
 
-   Specially, The creation and destruction of connection objects will cost the time heavily.
-Therefore, a connection object such as a connection pool is used for each RDD partition.
-foreachPartition for RDD in DStream is used to create a connection object for each partition in RDD,
- and use a connection object to write the data in a partition to MySQL. This can greatly reduces
- the number of connection objects created.
-
-     */
+      */
 
   def main(args: Array[String]): Unit = {
     val sparConf = new SparkConf().setMaster("local[*]").setAppName("first2cities_in_3_catagories")
@@ -159,6 +153,9 @@ foreachPartition for RDD in DStream is used to create a connection object for ea
 
 
   case class Buffer(var total_cnt: Long, var city_map: mutable.Map[String, Long])
+
+
+
 
   class CityRateUDAF extends Aggregator[String, Buffer, String] {
     override def zero: Buffer = {
