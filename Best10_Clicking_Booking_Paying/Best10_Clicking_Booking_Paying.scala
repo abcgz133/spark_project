@@ -1,4 +1,4 @@
-package sparkProject.Best10Clicking_Booking_Paying
+package sparkProject.Best10_Clicking_Booking_Paying
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.util.AccumulatorV2
@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable
 
-object Best10Clicking_Booking_Paying {
+object Best10_Clicking_Booking_Paying {
   /*
   1. define the connection to Spark
   2. define the accumulator extends AccumulatorV2

@@ -1,8 +1,8 @@
-First2cities_in_3_category_in_eachArea.scala
+Best2city_ratios_in_3_category_in_eachArea.scala
 
 ## 1.functions of this system.
 the system can list the most 3 popular products and related total clicking number in different areas in China.
-in each area, the system can also respectively list 2 biggest rates and names of the cities in these clicking transactions. 
+in each area group, The most complicated thing is that the spark SQL can not only list the corresponding city names in each area group, but can also use UDAF method to compute and list the 2 top transaction number ration of each city to the whole region.
 
 ## 2.Why using the SparkSQL?
 

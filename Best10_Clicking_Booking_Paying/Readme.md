@@ -2,8 +2,9 @@
 `
 ## 1.functions of this system.
 the system includes these functions:
-1. select the first 10 categories of product in a website that have been clicked, booked and pay. 
-2. sort the order by firstly comparing the numbers of clicking, if clicking numbers are the same, then by comparing the number of booking, if are the same, then by comparing the pay number.
+1. It selects the first 10 best categories of product in a website that have been clicked, booked and pay. 
+2. The sort policy is firstly to select the biggest total number of clicking. If total number of clicking were equal, then system compares the total number of booking, then total paying number.
+3. especially, comparing the traditional method to count the total number, it uses an Accumulator to accumulate the total number. this way can avoid the shuffle operation so that it can improve the system performance greatly.
 
 ## 2.Why using the Accumulator?  
 ### the advantages:

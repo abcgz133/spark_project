@@ -1,4 +1,4 @@
-package sparkProject.First2cities_in_3_category_in_eachArea
+package sparkProject.Best2city_ratios_in_3_category_in_eachArea
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.expressions.Aggregator
@@ -8,7 +8,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 import scala.collection.mutable
 import scala.collection.mutable.ListBuffer
 
-object First2cities_in_3_category_in_eachArea {
+object Best2city_ratios_in_3_category_in_eachArea {
   /*
     1. parse the textFile to table user_action, city_info and product_info
     2. select all necessary data that join thove 3 tables(user_action, city_info and product_info) to form a big table(named big_table1).
