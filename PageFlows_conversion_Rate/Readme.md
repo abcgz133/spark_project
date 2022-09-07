@@ -1,10 +1,7 @@
-PageFlows_covertingRate.scala
+PageFlows_conversion_Rate.scala
 
 ## 1.functions of this system.
-the system includes these functions:
-1. select the first 10 categories of product in a website that have been clicked, booked and pay. 
-2. list the top 5 session_id and total clicking number of each session in each 10 category.
-
+The system counts the conversion rate of each page to the adjacent page and lists the top 50 with the highest conversion rate.
 
 ## 2. Project resource structure
 

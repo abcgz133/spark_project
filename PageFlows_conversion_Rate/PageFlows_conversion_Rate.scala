@@ -1,9 +1,9 @@
-package sparkProject.PageFlows_covertingRate
+package sparkProject.PageFlows_conversion_Rate
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object PageFlows_covertingRate {
+object PageFlows_conversion_Rate {
   /*
  1. connect to Spark
  2. parse the data to case class
