@@ -2,52 +2,7 @@ PageFlows_conversion_Rate.scala
 
 ## 1.functions of this system.
 The system counts the conversion rate of each page to the adjacent page and lists the top 50 with the highest conversion rate.
-
-## 2. Project resource structure
-
-
-```
-E:.                                          
-├─.idea                                      
-│  └─codeStyles                              
-├─datas                                      
-├─output
-├─spark-receiver
-│  └─receivedBlockMetadata
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─cn
-│  │  │      └─aishengying
-│  │  │          ├─createorder
-│  │  │          └─util
-│  │  ├─resources
-│  │  └─scala
-│  │      └─sparkProject
-│  │          ├─Best10Clicking_Booking_Paying
-│  │          ├─BlackList_filter_create
-│  │          ├─First2cities_in_3_category_in_eachArea
-│  │          ├─First5goodUsers_in_best10Categories_Analysis
-│  │          ├─FiveMinuteFromKafkaTrend
-│  │          └─PageFlows_covertingRate
-│  └─test
-│      └─java
-└─target
-    └─classes
-       └─sparkProject
-          ├─Best10Clicking_Booking_Paying
-          ├─BlackList_filter_create
-          ├─First2cities_in_3_category_in_eachArea
-          ├─First5goodUsers_in_best10Categories_Analysis
-          ├─FiveMinuteFromKafkaTrend
-          └─PageFlows_covertingRate
-       
-
-```
-
-
-
-## 3. Code description
+## 2. Code description
 (First5goodUsers_in_best10Categories_Analysis.scala)
 ```
  /*
@@ -66,7 +21,7 @@ E:.
   */
 ```
 
-## 4. the result :
+## 3. the result :
 
 ```
 the rate of page_flow is 

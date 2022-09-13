@@ -1,4 +1,4 @@
-package sparkProject.Best10_Clicking_Booking_Paying
+package sparkProject.Best10_Clicking_Booking_Paying.Best10_Clicking_Booking_Paying_By_Accumulator
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.util.AccumulatorV2
@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable
 
-object Best10_Clicking_Booking_Paying {
+object Best10_Clicking_Booking_Paying_By_Accumulator {
   /*
   1. define the connection to Spark
   2. define the accumulator extends AccumulatorV2
@@ -27,7 +27,7 @@ object Best10_Clicking_Booking_Paying {
     sc.register(sumAccumulator, "ItemAccumulator")
 
     // 3. parse the data
-    val dataRDD: RDD[String] = sc.textFile("datas/user_visit_action.txt")
+    val dataRDD: RDD[String] = sc.textFile("data/user_visit_action.txt")
 
     dataRDD.foreach(
       line => {

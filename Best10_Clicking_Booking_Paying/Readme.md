@@ -1,35 +1,16 @@
-`Best 10 clicking_booking_paying.scala
-`
-## 1.functions of this system.
-the system includes these functions:
-1. It selects the first 10 best categories of product in a website that have been clicked, booked and pay. 
-2. The sort policy is firstly to select the biggest total number of clicking. If total number of clicking were equal, then system compares the total number of booking, then total paying number.
-3. especially, comparing the traditional method to count the total number, it uses an Accumulator to accumulate the total number. this way can avoid the shuffle operation so that it can improve the system performance greatly.
-
-## 2.Why using the Accumulator?  
-### the advantages:
-1. comparing other word-count method, using the Accumulator can avoid the shuffle operation in Executor, thus can greatly improve the efficiency.
 
 
-### how to use this Accumulator?
-1. create an accumulator class to extend the AccumulatorV2
-2. define the IN type and OUT type.
-3. override 6 methods :
-   isZero(): to judge whether the Out is zero value or not.
-   copy(): to create a new accumulator
-   reset(): to set the accumulator to zero value.
-   add(): to add the Input of IN to the accumulator within Executor.
-   merge(): to merge another same type of accumulator in the Driver.
-   value(): to define the final output of this accumulator class.
+## 1.functions
+System includes these 4 methods to compute the Best 10 clicking_booking_paying categroies:
+1. "Best10_Clicking_Booking_Paying_by_cogroup"
 
-##### 
-## 3. flowchart of this project
+2. "Best10_Clicking_Booking_Paying_by_union" ---this method improves some performance. for example, it uses cache to avoid the repeat operations in method one.
 
-```mermaid
-flowchart LR
-    A(define an accumulator Class to extend AccumulatorV2)-->|IN: cid, action, OUT: cid, Item |B(foreach function: add the data to the accumulator to accumulate) --> C(sortWith function: sorting the clicking number, then the booking number , then payment number)
-    
-```
+3. "Best10_Clicking_Booking_Paying_by_New_tuple_type"
+
+4. "Best10_Clicking_Booking_Paying_by_Accumulator"---comparing the above 3 methods, it used the Accumulator to avoid the shuffle operations.
+
+
 
 ## 4. Project resource structure
 
@@ -38,10 +19,12 @@ flowchart LR
 E:.                                          
 ├─.idea                                      
 │  └─codeStyles                              
-├─datas                                      
+├─data                                       
+│  ├─adclick                                 
+│  └─checkpoint                              
+├─metastore_db
 ├─output
 ├─spark-receiver
-│  └─receivedBlockMetadata
 ├─src
 │  ├─main
 │  │  ├─java
@@ -51,58 +34,64 @@ E:.
 │  │  │          └─util
 │  │  ├─resources
 │  │  └─scala
-│  │      └─sparkProject
-│  │          ├─Best10Clicking_Booking_Paying
-│  │          ├─BlackList_filter_create
-│  │          ├─First2cities_in_3_category_in_eachArea
-│  │          ├─First5goodUsers_in_best10Categories_Analysis
-│  │          ├─FiveMinuteFromKafkaTrend
-│  │          └─PageFlows_covertingRate
+│  │      ├─sparkProject
+│  │      │  ├─Best10_Clicking_Booking_Paying
+│  │      │  │  ├─Best10_Clicking_Booking_Paying_By_Accumulator
+│  │      │  │  ├─Best10_Clicking_Booking_Paying_number_By_cogroup
+│  │      │  │  ├─Best10_Clicking_Booking_Paying_number_By_New_Tuple_type
+│  │      │  │  └─Best10_Clicking_Booking_Paying_number_By_union
+│  │      │  ├─Best2city_ratios_in_3_category_in_eachArea
+│  │      │  ├─BlackList_filter_create
+│  │      │  ├─First5goodUsers_in_best10Categories_Analysis
+│  │      │  ├─FiveMinuteFromKafkaTrend
+│  │      │  └─PageFlows_conversion_Rate
+│  │      └─util
 │  └─test
 │      └─java
 └─target
-    └─classes
-       └─sparkProject
-          ├─Best10Clicking_Booking_Paying
-          ├─BlackList_filter_create
-          ├─First2cities_in_3_category_in_eachArea
-          ├─First5goodUsers_in_best10Categories_Analysis
-          ├─FiveMinuteFromKafkaTrend
-          └─PageFlows_covertingRate
-       
+    ├─classes
+    │  ├─sparkProject
+    │  │  ├─Best10_Clicking_Booking_Paying
+    │  │  │  ├─Best10_Clicking_Booking_Paying_By_Accumulator
+    │  │  │  ├─Best10_Clicking_Booking_Paying_number_By_cogroup
+    │  │  │  ├─Best10_Clicking_Booking_Paying_number_By_New_Tuple_type
+    │  │  │  └─Best10_Clicking_Booking_Paying_number_By_union
+    │  │  ├─Best10_Clicking_Booking_Paying_By_Accumulator
+    │  │  ├─Best2city_ratios_in_3_category_in_eachArea
+    │  │  ├─BlackList_filter_create
+    │  │  ├─First5goodUsers_in_best10Categories_Analysis
+    │  │  ├─FiveMinuteFromKafkaTrend
+    │  │  └─PageFlows_conversion_Rate
+    │  └─util
+    └─generated-sources
+        └─annotations
+
 
 ```
 
-
-
-## 5. Code description
-(Best10Clicking_Booking_Paying.scala)
-```
-/*
- 1. define the connection to Spark
-  2. define the accumulator extends AccumulatorV2
-  3. parse the data
-  4. acquire the value from the accumulator
-  5. sort the value
-  6. print in the console
-
-*/
-```
-
-## 6. the result :
+## 3. the same result :
 
 ```
-the best 10 clicking_booking_paying:
-category_id:15, (clicking_cnt:6120 booking:1672 paying_cnt:1259 )
-category_id:2, (clicking_cnt:6119 booking:1767 paying_cnt:1196 )
-category_id:20, (clicking_cnt:6098 booking:1776 paying_cnt:1244 )
-category_id:12, (clicking_cnt:6095 booking:1740 paying_cnt:1218 )
-category_id:11, (clicking_cnt:6093 booking:1781 paying_cnt:1202 )
-category_id:17, (clicking_cnt:6079 booking:1752 paying_cnt:1231 )
-category_id:7, (clicking_cnt:6074 booking:1796 paying_cnt:1252 )
-category_id:9, (clicking_cnt:6045 booking:1736 paying_cnt:1230 )
-category_id:19, (clicking_cnt:6044 booking:1722 paying_cnt:1158 )
-category_id:13, (clicking_cnt:6036 booking:1781 paying_cnt:1161 )
+category_id: 15 clicking number:6120 booking number:1672 paying number:1259
+category_id: 2 clicking number:6119 booking number:1767 paying number:1196
+category_id: 20 clicking number:6098 booking number:1776 paying number:1244
+category_id: 12 clicking number:6095 booking number:1740 paying number:1218
+category_id: 11 clicking number:6093 booking number:1781 paying number:1202
+category_id: 17 clicking number:6079 booking number:1752 paying number:1231
+category_id: 7 clicking number:6074 booking number:1796 paying number:1252
+category_id: 9 clicking number:6045 booking number:1736 paying number:1230
+category_id: 19 clicking number:6044 booking number:1722 paying number:1158
+category_id: 13 clicking number:6036 booking number:1781 paying number:1161
+category_id: 18 clicking number:6024 booking number:1754 paying number:1197
+category_id: 5 clicking number:6011 booking number:1820 paying number:1132
+category_id: 10 clicking number:5991 booking number:1757 paying number:1174
+category_id: 1 clicking number:5976 booking number:1766 paying number:1191
+category_id: 3 clicking number:5975 booking number:1749 paying number:1192
+category_id: 8 clicking number:5974 booking number:1736 paying number:1238
+category_id: 14 clicking number:5964 booking number:1773 paying number:1171
+category_id: 4 clicking number:5961 booking number:1760 paying number:1271
+category_id: 16 clicking number:5928 booking number:1782 paying number:1233
+category_id: 6 clicking number:5912 booking number:1768 paying number:1197
 
 ```
 

@@ -25,49 +25,7 @@ flowchart LR
     
 ```
 
-## 4. Project resource structure
-
-
-```
-E:.                                          
-├─.idea                                      
-│  └─codeStyles                              
-├─datas                                      
-├─output
-├─spark-receiver
-│  └─receivedBlockMetadata
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─cn
-│  │  │      └─aishengying
-│  │  │          ├─createorder
-│  │  │          └─util
-│  │  ├─resources
-│  │  └─scala
-│  │      └─sparkProject
-│  │          ├─Best10Clicking_Booking_Paying
-│  │          ├─BlackList_filter_create
-│  │          ├─First2cities_in_3_category_in_eachArea
-│  │          ├─First5goodUsers_in_best10Categories_Analysis
-│  │          ├─FiveMinuteFromKafkaTrend
-│  │          └─PageFlows_covertingRate
-│  └─test
-│      └─java
-└─target
-    └─classes
-       └─sparkProject
-          ├─Best10Clicking_Booking_Paying
-          ├─BlackList_filter_create
-          ├─First2cities_in_3_category_in_eachArea
-          ├─First5goodUsers_in_best10Categories_Analysis
-          ├─FiveMinuteFromKafkaTrend
-          └─PageFlows_covertingRate
-
-```
-
-
-## 5. System construction:
+## 4. System construction:
 ### Spark high available cluster:
 Hadoop: version 2.7.4. It is responsible for the data storage and management.
 
@@ -83,8 +41,8 @@ JDK: version 1.8
 version: 2.11-2.000. 
 
 
-## 6. Code description
-### 6.1 generating the simulation mock data and sending the data to Kafka
+## 5. Code description
+### 5.1 generating the simulation mock data and sending the data to Kafka
 (SparkStreaming_MockData.scala)
 ```
 /*
@@ -98,7 +56,7 @@ in the random method above, system uses the Random to create the clicking data.
 It includes the timeStamp, the area name , the city name, the user_id and advertisement_id.
 
 
-### 6.2 SparkStreaming receives data in Kafka consumer and dynamically analyzes the data in real time
+### 5.2 SparkStreaming receives data in Kafka consumer and dynamically analyzes the data in real time
 (FiveMinuteFromKafkaTrend.scala)
 
 ```
@@ -110,7 +68,7 @@ It includes the timeStamp, the area name , the city name, the user_id and advert
      */
 ```
 
-### 6.3 the simulation Mock data is like these:
+### 5.3 the simulation Mock data is like these:
 
 ```
 sending to Producer :1662360633899 EasternChina Shenzhen 3 1
@@ -130,7 +88,7 @@ sending to Producer :1662360633899 SouthernChina Shenzhen 3 4
 sending to Producer :1662360633899 EasternChina Shanghai 6 5
 sending to Producer :1662360633899 SouthernChina Shanghai 4 4
 ```
-### 6.4 the result is like these:
+### 5.4 the result is like these:
 
 ```
 -------------------------------------------

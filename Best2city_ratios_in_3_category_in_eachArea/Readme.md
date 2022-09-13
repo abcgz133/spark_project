@@ -2,7 +2,7 @@ Best2city_ratios_in_3_category_in_eachArea.scala
 
 ## 1.functions of this system.
 the system can list the most 3 popular products and related total clicking number in different areas in China.
-in each area group, The most complicated thing is that the spark SQL can not only list the corresponding city names in each area group, but can also use UDAF method to compute and list the 2 top transaction number ration of each city to the whole region.
+The most complicated thing is that the spark SQL can not only list the corresponding city names in each area group, but can also use UDAF method to compute and list the 2 top transaction number ration of each city to the whole region.
 
 ## 2.Why using the SparkSQL?
 
@@ -21,52 +21,10 @@ Secondly, it should override these 6 methods:
 
  
 
-## 3. Project resource structure
 
 
-```
-E:.                                          
-├─.idea                                      
-│  └─codeStyles                              
-├─datas                                      
-├─output
-├─spark-receiver
-│  └─receivedBlockMetadata
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─cn
-│  │  │      └─aishengying
-│  │  │          ├─createorder
-│  │  │          └─util
-│  │  ├─resources
-│  │  └─scala
-│  │      └─sparkProject
-│  │          ├─Best10Clicking_Booking_Paying
-│  │          ├─BlackList_filter_create
-│  │          ├─First2cities_in_3_category_in_eachArea
-│  │          ├─First5goodUsers_in_best10Categories_Analysis
-│  │          ├─FiveMinuteFromKafkaTrend
-│  │          └─PageFlows_covertingRate
-│  └─test
-│      └─java
-└─target
-    └─classes
-       └─sparkProject
-          ├─Best10Clicking_Booking_Paying
-          ├─BlackList_filter_create
-          ├─First2cities_in_3_category_in_eachArea
-          ├─First5goodUsers_in_best10Categories_Analysis
-          ├─FiveMinuteFromKafkaTrend
-          └─PageFlows_covertingRate
-       
-
-```
-
-
-
-## 4. Code description
-### 4.1 file(First2cities_in_3_category_in_eachArea.scala)
+## 3. Code description
+### 3.1 file(First2cities_in_3_category_in_eachArea.scala)
 ```
   /*
     1. parse the textFile to table user_action, city_info and product_info
@@ -79,7 +37,7 @@ E:.
       */
 ```
 
-## 5 the result:
+## 4 the result:
 ### English version:
 ```
 +----+-------+---------+-------------------------+----+

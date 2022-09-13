@@ -27,52 +27,10 @@ flowchart TB
 ```
 
 
-## 4. Project resource structure
 
 
-```
-E:.                                          
-├─.idea                                      
-│  └─codeStyles                              
-├─datas                                      
-├─output
-├─spark-receiver
-│  └─receivedBlockMetadata
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─cn
-│  │  │      └─aishengying
-│  │  │          ├─createorder
-│  │  │          └─util
-│  │  ├─resources
-│  │  └─scala
-│  │      └─sparkProject
-│  │          ├─Best10Clicking_Booking_Paying
-│  │          ├─BlackList_filter_create
-│  │          ├─First2cities_in_3_category_in_eachArea
-│  │          ├─First5goodUsers_in_best10Categories_Analysis
-│  │          ├─FiveMinuteFromKafkaTrend
-│  │          └─PageFlows_covertingRate
-│  └─test
-│      └─java
-└─target
-    └─classes
-       └─sparkProject
-          ├─Best10Clicking_Booking_Paying
-          ├─BlackList_filter_create
-          ├─First2cities_in_3_category_in_eachArea
-          ├─First5goodUsers_in_best10Categories_Analysis
-          ├─FiveMinuteFromKafkaTrend
-          └─PageFlows_covertingRate
-       
-
-```
-
-
-
-## 5. Code description
-### 5.1 file(BlackList_filter_create.scala)
+## 4. Code description
+### 4.1 file(BlackList_filter_create.scala)
 ```
 /*
     1. receive data from Kafka,
@@ -89,7 +47,7 @@ E:.
 ```
  above codes are responsible for monitoring and accumulating the number of times.
 
-### 5.2 file(SparkStreaming_MockData)
+### 4.2 file(SparkStreaming_MockData)
 ```
 /*
 1. to Generate simulation Mock data

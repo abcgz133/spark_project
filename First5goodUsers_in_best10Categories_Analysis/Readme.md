@@ -6,51 +6,8 @@ the system includes these functions:
 2. list the top 5 session_id and total clicking number of each session in each 10 category.
 
 
-## 2. Project resource structure
 
-
-```
-E:.                                          
-├─.idea                                      
-│  └─codeStyles                              
-├─datas                                      
-├─output
-├─spark-receiver
-│  └─receivedBlockMetadata
-├─src
-│  ├─main
-│  │  ├─java
-│  │  │  └─cn
-│  │  │      └─aishengying
-│  │  │          ├─createorder
-│  │  │          └─util
-│  │  ├─resources
-│  │  └─scala
-│  │      └─sparkProject
-│  │          ├─Best10Clicking_Booking_Paying
-│  │          ├─BlackList_filter_create
-│  │          ├─First2cities_in_3_category_in_eachArea
-│  │          ├─First5goodUsers_in_best10Categories_Analysis
-│  │          ├─FiveMinuteFromKafkaTrend
-│  │          └─PageFlows_covertingRate
-│  └─test
-│      └─java
-└─target
-    └─classes
-       └─sparkProject
-          ├─Best10Clicking_Booking_Paying
-          ├─BlackList_filter_create
-          ├─First2cities_in_3_category_in_eachArea
-          ├─First5goodUsers_in_best10Categories_Analysis
-          ├─FiveMinuteFromKafkaTrend
-          └─PageFlows_covertingRate
-       
-
-```
-
-
-
-## 3. Code description
+## 2. Code description
 (First5goodUsers_in_best10Categories_Analysis.scala)
 ```
 /*
@@ -66,7 +23,7 @@ E:.
 */
 ```
 
-## 4. the result :
+## 3. the result :
 
 ```
 First 5 users in best10 category: 

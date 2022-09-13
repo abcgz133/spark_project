@@ -27,7 +27,7 @@ object Best2city_ratios_in_3_category_in_eachArea {
       .getOrCreate()
 
     //parse the textFile to table user_action, city_info and product_info
-    val dataRDD: RDD[String] = sc.textFile("datas/user_visit_action.txt")
+    val dataRDD: RDD[String] = sc.textFile("data/user_visit_action.txt")
     val userActionRDD: RDD[UserVisitAction] = dataRDD.map(
       line => {
         val lineArray: Array[String] = line.split("_")
@@ -54,7 +54,7 @@ object Best2city_ratios_in_3_category_in_eachArea {
     userActionRDD.toDF().createOrReplaceTempView("user_visit_action")
     spark.sql("select * from user_visit_action").show()
 
-    val cityDataRDD: RDD[String] = sc.textFile("datas/city_info.txt")
+    val cityDataRDD: RDD[String] = sc.textFile("data/city_info.txt")
     val cityINFORDD: RDD[CityInfo] = cityDataRDD.map(
       line => {
         val citylineArray: Array[String] = line.split("\t")
@@ -70,7 +70,7 @@ object Best2city_ratios_in_3_category_in_eachArea {
     cityINFORDD.toDF().createOrReplaceTempView("city_info")
     spark.sql("select * from city_info").show()
 
-    val productDataRDD: RDD[String] = sc.textFile("datas/product_info.txt")
+    val productDataRDD: RDD[String] = sc.textFile("data/product_info.txt")
     val productRDD: RDD[ProductInfo] = productDataRDD.map(
       line => {
         val productArray: Array[String] = line.split("\t")
