@@ -1,29 +1,41 @@
+`Best10_Clicking_Booking_Paying_number_By_New_Tuple_type.scala
+`
+## 1.functions of this system.
+This package uses the project engineering method to rewrite the best10_clicking_booking_paying code.
+
+This project uses controller/service/dao to process code, which has the advantage to reduce code coupling.
+
+## 2. the util and the comm packages in the project
+util: this package includes the methods to store the SparkContext instance in the Buffer and to get the stored instance out.
+comm: this includes some methods defined in the Trait of Controller and Service and Dao.
 
 
-## 1.functions of this sparkProject.
-System includes these analysis functions:
-1. "Best10_Clicking_Booking_Paying"---It selects the first 10 best categories of product in a website that have been clicked, booked and pay. The sort policy is firstly to select the biggest total number of clicking. If total number of clicking were equal, then system compares the total number of booking, then total paying number.
+## 3. the result :
 
-   especially, this package includes 4 different smart and efficient methods to get the same result.
+```
+category_id: 15 clicking number:6120 booking number:1672 paying number:1259
+category_id: 2 clicking number:6119 booking number:1767 paying number:1196
+category_id: 20 clicking number:6098 booking number:1776 paying number:1244
+category_id: 12 clicking number:6095 booking number:1740 paying number:1218
+category_id: 11 clicking number:6093 booking number:1781 paying number:1202
+category_id: 17 clicking number:6079 booking number:1752 paying number:1231
+category_id: 7 clicking number:6074 booking number:1796 paying number:1252
+category_id: 9 clicking number:6045 booking number:1736 paying number:1230
+category_id: 19 clicking number:6044 booking number:1722 paying number:1158
+category_id: 13 clicking number:6036 booking number:1781 paying number:1161
+category_id: 18 clicking number:6024 booking number:1754 paying number:1197
+category_id: 5 clicking number:6011 booking number:1820 paying number:1132
+category_id: 10 clicking number:5991 booking number:1757 paying number:1174
+category_id: 1 clicking number:5976 booking number:1766 paying number:1191
+category_id: 3 clicking number:5975 booking number:1749 paying number:1192
+category_id: 8 clicking number:5974 booking number:1736 paying number:1238
+category_id: 14 clicking number:5964 booking number:1773 paying number:1171
+category_id: 4 clicking number:5961 booking number:1760 paying number:1271
+category_id: 16 clicking number:5928 booking number:1782 paying number:1233
+category_id: 6 clicking number:5912 booking number:1768 paying number:1197
 
-2. "BlackList_filter_create"---Using Spark Streaming, it receives the flow data from the Consumer of the Kafka. It monitors and accumulates the number of times that one user clicks on one product on a website every day. If the number of times is greater than a threshold (for example, 20 times), then the user_ID will be added to the blacklist on MySQL.
-
-3. "Best2city_ratios_in_3_category_in_eachArea"---Using Spark SQL, it can list the most 3 popular products and related total clicking number in different area groups in China. The most complicated thing is that the spark SQL can not only list the corresponding city names in each area group, but can also use UDAF method to compute and list the 2 top transaction number ration of each city to the whole region.
-
-4. "First5goodUsers_in_best10Categories_Analysis"---It firstly selects the first 10 categories of product in a website that have been clicked, booked and pay. and secondly it lists the top 5 session_id and total clicking number of each session in each 10 category.
-
-5. "FiveMinuteFromKafkaTrend"--- Using Spark Streaming, it receives the data from Kafka to DStream then counts the total number of clicking within 5 minutes in each 10 seconds.
-
-6. "PageFlows_conversion_Rate"---It counts the conversion rate of each page to the adjacent page and lists the top 50 with the highest conversion rate.
-
-7. "frameWork_Best10"--It uses the project engineering method to rewrite the above best10_clicking_booking_paying project which divided the codes to 3 layers: controller/service/dao
-
-
-
-
-## 4. Project resource structure
-
-
+```
+## 3. the structure
 ```
 E:.                                          
 ├─.idea                                      
@@ -92,5 +104,4 @@ E:.
 
 
 ```
-
 
