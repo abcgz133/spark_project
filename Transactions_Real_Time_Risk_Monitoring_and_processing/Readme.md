@@ -7,16 +7,16 @@ Although the updateStateByKey function can also accumulate the data from Kafka. 
 so using the MySQL to store the transactions and black_list is an alternative useful way.
 
 ###3. special point:
-Specially, The creation and destruction of connection objects will cost the time heavily. If using the foreach function, each RDD will create one connection, this will lower the system performance seriously. 
+Specially, because the creation and destruction of connection objects will cost the time heavily. If using the foreach function, each RDD will create one connection, this will lower the system performance seriously. 
 but in contrast, if using the foreachPartition in DStream ,this will only create one connection object in each partition.
 this can greatly reduce the cost to the system and can improve the performance greatly.
 
 ##### 
-## 3. flowchart of this project
+## 3. Flowchart of this project
 
 ```mermaid
 flowchart TB
-    A(receive data from Kafka) -->B(transform the data to DStream and parse the data to a case class) --> C(receive card from black_list in MySQL, then filter the data if card is not in  the black_list) --> D("map the filtered data to ((day, card, advertise_id),1)  and then reduce them to count the total number of clicks of each advertise_id by each card in each day")
+    A(receive data from Kafka) -->B(transform the data to DStream and parse the data to a case class) --> C(receive card from black_list in MySQL, then filter the data if card is not in  the black_list and the amount >=20,000 and transaction_type ==00) --> D("map the filtered data to ((day, card, advertise_id),1)  and then reduce them to count the total number of clicks of each advertise_id by each card in each day")
     D --> E{"counted total number >= Threshod? "}
     E -->|yes|F(insert or update the blacklist databse)
     E -->|No|G(update or insert the user_ad_count database)
@@ -24,35 +24,19 @@ flowchart TB
     H -->|yes|I(insert or update the black_list databse)
    
 ```
-
-
-```mermaid
-flowchart TB
-    A(receive data from Kafka) -->B(transform the data to DStream and parse the data to a case class) --> C(receive card from black_list in MySQL) 
-    C --> J{"card is not in  the black_list? and the amount >=20,000? and transaction_type =='00'?  "}  
-    J -->|yes|D(map the filtered data to ((day, card, advertise_id),1)  and then reduce them to count the total number of clicks of each advertise_id by each card in each day)
-    D --> E{"counted total number >= Threshod? "}
-    E -->|yes|F(insert or update the blacklist databse)
-    E -->|No|G(update or insert the user_ad_count database)
-    G --> H{"updated counted total number >=Threshold? "}
-    H -->|yes|I(insert or update the black_list databse)
-   
-```
-
-
 
 ## 4. Code description
 ### 4.1 file(BlackList_filter_create.scala)
 ```
-/*
+  /*
     1. receive data from Kafka,
     2. transform the data to DStream and parse the data to a case class
-    3. select card from black_list, then filter the data if card is in the black_list or the amount <20000 or the transaction_type is not "consume" 
+    3. select card from black_list, then filter the data if card is not in the black_list and the amount >=20,000 and the transaction_typs is "00"(means: a consumption type transaction)
     4. map the filtered data to ((day, card, merchant_id),1)  and then reduce them to count the total number
      of clicks to each advertise_id by each card in each day.
-    5. if counted_total_number >20 then insert or update the blacklist.
-    6. if counted_total_number <=20, then update or insert into the user_ad_count ,
-    if the updated counted_total_number >20, then insert or update the card into  black_list
+    5. if counted_total_number >20 then insert or update the card into the blacklist.
+    6. if counted_total_number <=20, then update or insert into the historical_card_merchant_counted ,
+    if finding the updated total_number in the history_user_ad_count >20, then insert or update the card into  black_list
 
      */
 
@@ -71,7 +55,7 @@ flowchart TB
 above code is responsible for creating the simulating mock data to the producer of Kafka.
 
 ## 5. Result
-### 5.1 the data in table historical_card_merchant_counted
+### 5.1 the data in table of "historical_card_merchant_counted"
 ```
 day			card				merchant_id		counted_total_number
 2023-05-23	5359180080081201	102440189981051	16
@@ -112,7 +96,7 @@ day			card				merchant_id		counted_total_number
 2023-05-23	5359180080081206	102440189981056	20
 
 ```
-### 5.2 the data in table black_list
+### 5.2 the data in table of "black_list"
 ```
 card
 5359180080081201
@@ -123,5 +107,4 @@ card
 5359180080081206
 
 ```
-
 

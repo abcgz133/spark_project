@@ -77,8 +77,6 @@ object Transactions_Real_Time_Risk_Monitoring_and_processing {
           }
         )
 
-        filteredRDD.foreach( x=>println("processing data : " + x))
-
         filteredRDD.map(
           data => {
             val sdf = new SimpleDateFormat("yyyy-MM-dd")
@@ -93,6 +91,8 @@ object Transactions_Real_Time_Risk_Monitoring_and_processing {
     reducedGroupedDstream.foreachRDD(
       rdd => {
         rdd.foreachPartition(
+          // 放在这里？   放在这里，data其实对应的是 拿到的分区数据
+          // val conn = JDBCUtil.getConnection
           data => data.foreach {
 
             case ((day, card, merchant_id), counted_total_number) => {
@@ -101,6 +101,7 @@ object Transactions_Real_Time_Risk_Monitoring_and_processing {
               // then if the new counted > 20 then insert or update into
               // the black_list
               if (counted_total_number < 20) {
+                //下面这条可以删除？
                 val conn = JDBCUtil.getConnection
                 val sql1 =
                   """
