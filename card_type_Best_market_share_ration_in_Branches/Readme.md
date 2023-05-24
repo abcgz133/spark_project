@@ -10,14 +10,14 @@ The most complicated thing is that the spark SQL can not only list the correspon
 Technically, programmers can use spark.UDF function to add user-defined Aggregation function to implement user-defined function in SparkSQL.
 
 #### how to extend the Aggregator to implement user-defined function?
-firstly, defining an aggregator Class to extend the Aggregator. It should define the type of In , Out and Buffer. 
-Secondly, it should override these 6 methods:
-  zero() : to create or new a zero value Buffer.
-  reduce(): to define how to aggregate an In instance to the Buffer instance.
-  merge(): to define how to merge two Buffer instances.
-  finish(): to define how to output the Out instance.
-  bufferEncoder(): to define how to encode the buffer.
-  outputEncoder(): to define how to encode the output. 
+firstly, defining an aggregator Class to extend the Aggregator. It should define the type of In , Out and Buffer.   
+Secondly, it should override these 6 methods:  
+  zero() : to create or new a zero value Buffer.  
+  reduce(): to define how to aggregate an In instance to the Buffer instance.  
+  merge(): to define how to merge two Buffer instances.  
+  finish(): to define how to output the Out instance.  
+  bufferEncoder(): to define how to encode the buffer.  
+  outputEncoder(): to define how to encode the output.   
 
  
 
