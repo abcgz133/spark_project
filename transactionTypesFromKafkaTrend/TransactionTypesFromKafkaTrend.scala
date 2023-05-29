@@ -1,4 +1,4 @@
-package creditcard_sparkProject.fiveMinuteFromKafkaTrend
+package creditcard_sparkProject.transactionTypesFromKafkaTrend
 
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf
@@ -11,7 +11,7 @@ import util.JDBCUtil
 import java.text.SimpleDateFormat
 import java.util.Date
 
-object FiveMinuteFromKafkaTrend {
+object TransactionTypesFromKafkaTrend {
     /*
     1. receive the data from the Producer and parse the data to a Case Class Transaction_Item.
     2. Classify the time into the nearest part(Divide one minute into six parts).

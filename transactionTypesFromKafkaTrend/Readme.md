@@ -1,15 +1,17 @@
-FiveMinuteFromKafkaTrend.scala
 
-# Using the SparkStreaming dynamically analyze the flowing data from Kafka within 5 minutes in each 10 seconds.
+![avatar](../images/Trend_payment.png)
+
+## 1.Purpose
+Analyzing the transaction payment trend dynamically in 10 seconds by Spark Streaming. It can receive the Kafka flowing data in each 10 seconds and compute the transaction number. Secondly, it can show the trend of 3 different payment types(01--Alipay, 02--WeChat pay, 03--other payments) and the summary of transaction numbers in each day in a BI tool graphically  and intuitively. 
 
 
-## 1.functions of this system.
+## 2.functions of this system.
 the system includes these functions:
 1. parse the data from Kafka to DStream.
-2. because only showing the data in the 0,10,20,30,40,50 second in one minute, so Classify the time of the data into the nearest part(Divide one minute into six parts).
-3. count the total number of clicking within 5 minutes in each 10 seconds.(这里没有说清楚滑窗的概念！)
+2. because only showing the data in the 0-th,10-th,20-th,30-th,40-th,50-th second in one minute, so classify the transaction time of the data into the nearest part(the 0-th,10-th,20-th,30-th,40-th,50-th second part).
+3. reduce the data to count the number of transactions in each 10 seconds by using the reduceByKeyAndWindow function. 
 
-## 2.Why Spark and Kafka? 
+## 3.Why Spark and Kafka? 
 ### the advantages of Spark：
 1. Spark supports streaming computing framework, high throughput and fault-tolerant processing.
 2. Spark supports cluster manager, which can efficiently scale computing from one to thousands of nodes.
@@ -18,14 +20,14 @@ the system includes these functions:
 ### the advantages of Kafka：
 Kafka is a distributed subscribe message system with high throughput . Based on zookeeper, it has important functions in real-time computing system.
 ##### 
-## 3. flowchart of this project
+## 4. flowchart of this project
 ```mermaid
 flowchart LR
     A(Simulation System)-->| MockData| B(Kafka) --> C(Spark Streaming)
     
 ```
 
-## 4. System construction:
+## 5. System construction:
 ### Spark high available cluster:
 Hadoop: version 2.7.4. It is responsible for the data storage and management.
 
@@ -41,35 +43,37 @@ JDK: version 1.8
 version: 2.11-2.000. 
 
 
-## 5. Code description
-### 5.1 generating the simulation mock data and sending the data to Kafka
+## 6. Code description
+### 6.1 generating the simulation mock data and sending the data to Kafka
 (SparkStreaming_MockData.scala)
 ```
 /*
 1. to Generate simulation Mock data
-     formate: timestamp payment_type card_number merchant_id 
+     the sending message format: timestamp payment_type card_number merchant_id 
      they are seperated by space
 2. to produce the data to Producer of Kafka, the topic is "aiShengYing"
 */
 ```
-in the random method above, system uses the Random to create the clicking data.
-It includes the timeStamp, the area name , the city name, the user_id and advertisement_id.
+in the random method above, system uses the Random to create the transaction data.
+It includes the timeStamp, the payment type , the card number, and merchant_id.
 
 
-### 5.2 SparkStreaming receives data in Kafka consumer and dynamically analyzes the data in real time
-(FiveMinuteFromKafkaTrend.scala)
+### 6.2 the Spark Streaming receives the data in Kafka consumer and dynamically analyzes the data in real time
 
 ```
   /*
     1. receive the data from the Producer and parse the data to a Case Class AdClickData.
     2. Classify the time into the nearest part(Divide one minute into six parts).
     3. map this newTime to (newTime,1)
-    4. reduceByKeyAndWindow and get the count of (newTime,1) in 5 minutes wide window.
+    4. reduceByKeyAndWindow and get the count of (newTime,1) in a sliding window.
+    5. save the result to the MySQL
+    6. illustrate the trend data in the Business Intelligence tool: FineBI
      */
 ```
 
-### 5.3 the simulation Mock data is like these:
+### 6.3 the simulation Mock data is like these:
 
+（sending Message format : timestamp Payment_Type Card_number Merchant_id）
 ```
 sending to Producer :1685350763403 01 5359180080992518 102440183981065 
 sending to Producer :1685350763403 00 5359180080996271 102440183982502 

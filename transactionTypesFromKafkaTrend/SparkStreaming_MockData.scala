@@ -1,4 +1,4 @@
-package creditcard_sparkProject.fiveMinuteFromKafkaTrend
+package creditcard_sparkProject.transactionTypesFromKafkaTrend
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 
