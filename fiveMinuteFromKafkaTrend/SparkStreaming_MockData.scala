@@ -43,9 +43,9 @@ object SparkStreaming_MockData {
   def dataMock(): ListBuffer[String] = {
     // dataMock format : System.currentTimeMillis area city uid aid
     val dataList = ListBuffer[String]()
-
+    val transaction_category = ListBuffer[String]("00", "00", "00", "01","01","01","02")
     for (i <- 1 to new Random().nextInt(50)) {
-      val transaction_type = "0" + new Random().nextInt(6).toString
+      val transaction_type = transaction_category(new Random().nextInt(7))
       val card_no = "535918008099" +  ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString) + ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString)
       val merchant_id = "10244018398" + ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString) + ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString)
       val sys_time = System.currentTimeMillis

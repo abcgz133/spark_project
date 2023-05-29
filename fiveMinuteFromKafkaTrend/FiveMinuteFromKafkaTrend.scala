@@ -44,10 +44,6 @@ object FiveMinuteFromKafkaTrend {
                 val datas = data.split(" ")
                 Transaction_Item(datas(0), datas(1), datas(2), datas(3))
             }
-        ).filter(
-            transaction_item => {
-                transaction_item.transaction_type.equals("00")
-            }
         )
 
 
@@ -81,7 +77,7 @@ object FiveMinuteFromKafkaTrend {
                                     """
                                       |insert into transaction_item (date_kafka, transaction_type, sub_total_number_consume, time_kafka) values (?, ?, ?,? )
                                       |""".stripMargin
-                                JDBCUtil.executeUpdate(conn, sql1, Array(x._1._1.substring(0,10), x._1._2, x._2,x._1._1.substring(10,19) ))
+                                JDBCUtil.executeUpdate(conn, sql1, Array(x._1._1.substring(0,10), x._1._2, x._2,x._1._1.substring(11,19) ))
                                 val sql2 =
                                     """
                                       |insert into total_transactions( day, total_item_consume , transaction_type) values(?,?,?)
