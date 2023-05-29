@@ -7,7 +7,7 @@ FiveMinuteFromKafkaTrend.scala
 the system includes these functions:
 1. parse the data from Kafka to DStream.
 2. because only showing the data in the 0,10,20,30,40,50 second in one minute, so Classify the time of the data into the nearest part(Divide one minute into six parts).
-3. count the total number of clicking within 5 minutes in each 10 seconds.
+3. count the total number of clicking within 5 minutes in each 10 seconds.(这里没有说清楚滑窗的概念！)
 
 ## 2.Why Spark and Kafka? 
 ### the advantages of Spark：

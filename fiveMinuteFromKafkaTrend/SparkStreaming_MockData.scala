@@ -2,7 +2,8 @@ package creditcard_sparkProject.fiveMinuteFromKafkaTrend
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 
-import java.util.{Properties, Random}
+import java.text.SimpleDateFormat
+import java.util.{Date, Properties, Random}
 import scala.collection.mutable.ListBuffer
 
 object SparkStreaming_MockData {
@@ -41,16 +42,18 @@ object SparkStreaming_MockData {
 
   def dataMock(): ListBuffer[String] = {
     // dataMock format : System.currentTimeMillis area city uid aid
-    val areaList: ListBuffer[String] = ListBuffer[String]("SouthernChina", "EasternChina", "WesternChina")
-    val cityList = ListBuffer[String]("Beijing", "Shanghai", "Shenzhen", "Guangzhou")
-
     val dataList = ListBuffer[String]()
+
     for (i <- 1 to new Random().nextInt(50)) {
-      val area = areaList(new Random().nextInt(3))
-      val city = cityList(new Random().nextInt(4))
-      val uid = new Random().nextInt(6) + 1
-      val aid = new Random().nextInt(6) + 1
-      dataList.append(s"${System.currentTimeMillis()} ${area} ${city} ${uid} ${aid}")
+      val transaction_type = "0" + new Random().nextInt(6).toString
+      val card_no = "535918008099" +  ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString) + ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString)
+      val merchant_id = "10244018398" + ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString) + ((new Random().nextInt(10)).toString  + (new Random().nextInt(10)).toString)
+      val sys_time = System.currentTimeMillis
+      val newTS = sys_time / 10000 * 10000
+      val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+      val tran_time_stats = sdf.format(new Date(newTS.toLong))
+      val original_sys_time = sdf.format(new Date(sys_time.toLong))
+      dataList.append(s"${System.currentTimeMillis()} ${transaction_type} ${card_no} ${merchant_id} new_Ts:${newTS} tran_time_stats${tran_time_stats} original_sys_time${original_sys_time}")
     }
 
     dataList

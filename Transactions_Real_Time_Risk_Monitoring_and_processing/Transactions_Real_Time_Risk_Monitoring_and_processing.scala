@@ -92,13 +92,7 @@ object Transactions_Real_Time_Risk_Monitoring_and_processing {
     reducedGroupedDstream.foreachRDD(
       (rdd: RDD[((String, String, String), Int)]) => {
         rdd.foreachPartition(
-          // 放在这里？   放在这里，data其实对应的是 拿到的分区数据
-          //val conn = JDBCUtil.getConnection
-
-
-
-
-          (data2: Iterator[((String, String, String), Int)]) => data2.foreach {
+          data2 => data2.foreach {
 
             case ((day, card, merchant_id), counted_total_number) => {
               println(s"day: ${day} card:${card} merchant_id:${merchant_id} counted_total_number:${counted_total_number} ")
@@ -106,7 +100,7 @@ object Transactions_Real_Time_Risk_Monitoring_and_processing {
               // then if the new counted > 20 then insert or update into
               // the black_list
               if (counted_total_number < 20) {
-                //下面这条可以删除？
+
                 val conn = JDBCUtil.getConnection
                 val sql1 =
                   """
