@@ -53,7 +53,7 @@ object SparkStreaming_MockData {
       val sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
       val tran_time_stats = sdf.format(new Date(newTS.toLong))
       val original_sys_time = sdf.format(new Date(sys_time.toLong))
-      dataList.append(s"${System.currentTimeMillis()} ${transaction_type} ${card_no} ${merchant_id} new_Ts:${newTS} tran_time_stats${tran_time_stats} original_sys_time${original_sys_time}")
+      dataList.append(s"${System.currentTimeMillis()} ${transaction_type} ${card_no} ${merchant_id} ")
     }
 
     dataList

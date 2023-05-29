@@ -47,8 +47,8 @@ version: 2.11-2.000.
 ```
 /*
 1. to Generate simulation Mock data
-     formate: timestamp area city user_id ad_id
-     meaning: timestamp area city user_id,advertisement_id
+     formate: timestamp payment_type card_number merchant_id 
+     they are seperated by space
 2. to produce the data to Producer of Kafka, the topic is "aiShengYing"
 */
 ```
@@ -71,63 +71,23 @@ It includes the timeStamp, the area name , the city name, the user_id and advert
 ### 5.3 the simulation Mock data is like these:
 
 ```
-sending to Producer :1662360633899 EasternChina Shenzhen 3 1
-sending to Producer :1662360633899 EasternChina Shanghai 4 1
-sending to Producer :1662360633899 SouthernChina Shanghai 6 2
-sending to Producer :1662360633899 SouthernChina Beijing 5 5
-sending to Producer :1662360633899 SouthernChina Guangzhou 1 3
-sending to Producer :1662360633899 SouthernChina Beijing 3 2
-sending to Producer :1662360633899 SouthernChina Shanghai 1 6
-sending to Producer :1662360633899 SouthernChina Beijing 1 5
-sending to Producer :1662360633899 SouthernChina Guangzhou 5 1
-sending to Producer :1662360633899 EasternChina Beijing 1 3
-sending to Producer :1662360633899 WesternChina Shenzhen 5 5
-sending to Producer :1662360633899 WesternChina Guangzhou 3 1
-sending to Producer :1662360633899 SouthernChina Guangzhou 6 5
-sending to Producer :1662360633899 SouthernChina Shenzhen 3 4
-sending to Producer :1662360633899 EasternChina Shanghai 6 5
-sending to Producer :1662360633899 SouthernChina Shanghai 4 4
-```
-### 5.4 the result is like these:
+sending to Producer :1685350763403 01 5359180080992518 102440183981065 
+sending to Producer :1685350763403 00 5359180080996271 102440183982502 
+sending to Producer :1685350763403 01 5359180080997903 102440183989820 
+sending to Producer :1685350763404 00 5359180080991865 102440183980061 
+sending to Producer :1685350763404 02 5359180080992011 102440183986092 
+sending to Producer :1685350763404 01 5359180080990696 102440183985130 
+sending to Producer :1685350763404 01 5359180080992951 102440183985928 
+sending to Producer :1685350763404 01 5359180080999970 102440183985204 
+sending to Producer :1685350763404 01 5359180080996377 102440183981552 
+sending to Producer :1685350763404 02 5359180080995514 102440183988093 
+sending to Producer :1685350763404 01 5359180080991505 102440183987991 
+sending to Producer :1685350763404 01 5359180080992192 102440183989179 
+sending to Producer :1685350763405 01 5359180080994820 102440183983301 
+sending to Producer :1685350763405 01 5359180080991329 102440183989787 
 
 ```
--------------------------------------------
-Time: 1662360345000 ms
--------------------------------------------
-(1662360320000,73)
-(1662360290000,39)
-(1662360300000,56)
-(1662360330000,39)
-(1662360340000,44)
-(1662360280000,47)
-(1662360310000,41)
+### 5.4 the result 
+![avatar](../images/Trend_payment.png)
 
--------------------------------------------
-Time: 1662360375000 ms
--------------------------------------------
-(1662360320000,73)
-(1662360370000,1)
-(1662360290000,39)
-(1662360300000,56)
-(1662360330000,39)
-(1662360340000,91)
-(1662360350000,32)
-(1662360360000,55)
-(1662360280000,47)
-(1662360310000,41)
-
--------------------------------------------
-Time: 1662360405000 ms
--------------------------------------------
-(1662360320000,73)
-(1662360370000,13)
-(1662360290000,39)
-(1662360300000,56)
-(1662360400000,14)
-(1662360330000,39)
-(1662360340000,91)
-(1662360350000,32)
-(1662360360000,55)
-(1662360390000,86)
-```
 
