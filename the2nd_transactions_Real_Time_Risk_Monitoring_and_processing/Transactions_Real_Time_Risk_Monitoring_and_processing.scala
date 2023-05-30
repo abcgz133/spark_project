@@ -1,4 +1,4 @@
-package creditcard_sparkProject.transactions_Real_Time_Risk_Monitoring_and_processing
+package sparkProject.the2nd_transactions_Real_Time_Risk_Monitoring_and_processing
 
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf

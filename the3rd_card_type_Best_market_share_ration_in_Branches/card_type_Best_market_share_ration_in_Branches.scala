@@ -1,4 +1,4 @@
-package creditcard_sparkProject.card_type_Best_market_share_ration_in_Branches
+package sparkProject.the3rd_card_type_Best_market_share_ration_in_Branches
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.sql.expressions.Aggregator
