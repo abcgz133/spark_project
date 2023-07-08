@@ -6,7 +6,7 @@ import org.apache.spark.{SparkConf, SparkContext}
 
 import scala.collection.mutable
 
-object Best10_Clicking_Booking_Paying_By_Accumulator {
+object By_Accumulator {
   /*
   1. define the connection to Spark
   2. define the accumulator extends AccumulatorV2
