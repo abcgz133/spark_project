@@ -1,9 +1,9 @@
-package sparkProject.the4th_other_projects.best10_Clicking_Booking_Paying.Best10_Clicking_Booking_Paying_number_By_cogroup
+package creditcard_sparkProject.the4th_other_projects.best10_Clicking_Booking_Paying.By_cogroup
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Best10_Clicking_Booking_Paying_number_By_cogroup {
+object By_cogroup {
   /*
     1. connect to Spark
     2. filter and map the data to (category_id, clicking_number) and (category_id, booking_number) and (category_id, paying_number)

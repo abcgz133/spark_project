@@ -1,4 +1,4 @@
-package sparkProject.the4th_other_projects.pageFlows_conversion_Rate
+package creditcard_sparkProject.the4th_other_projects.pageFlows_conversion_Rate
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}

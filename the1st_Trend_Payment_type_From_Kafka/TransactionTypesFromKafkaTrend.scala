@@ -1,4 +1,4 @@
-package sparkProject.the1st_Trend_Payment_type_From_Kafka
+package creditcard_sparkProject.the1st_Trend_Payment_type_From_Kafka
 
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf

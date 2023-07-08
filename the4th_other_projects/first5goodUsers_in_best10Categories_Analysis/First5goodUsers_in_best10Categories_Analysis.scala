@@ -1,4 +1,4 @@
-package sparkProject.the4th_other_projects.first5goodUsers_in_best10Categories_Analysis
+package creditcard_sparkProject.the4th_other_projects.first5goodUsers_in_best10Categories_Analysis
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}

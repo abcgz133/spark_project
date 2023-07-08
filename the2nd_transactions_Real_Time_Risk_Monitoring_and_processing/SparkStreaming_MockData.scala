@@ -1,4 +1,4 @@
-package sparkProject.the2nd_transactions_Real_Time_Risk_Monitoring_and_processing
+package creditcard_sparkProject.the2nd_transactions_Real_Time_Risk_Monitoring_and_processing
 
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerConfig, ProducerRecord}
 

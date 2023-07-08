@@ -1,4 +1,4 @@
-package sparkProject.the4th_other_projects.frameWork_Best10.comm
+package creditcard_sparkProject.the4th_other_projects.frameWork_Best10.comm
 
 import exercise.frameWork_Best10.util.BufferUtil
 import org.apache.spark.{SparkConf, SparkContext}

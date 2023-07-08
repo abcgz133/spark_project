@@ -16,10 +16,10 @@ this can greatly reduce the cost to the system and can improve the performance g
 
 ```mermaid
 flowchart TB
-    A(receive data from Kafka) -->B(transform the data to DStream and parse the data to a case class) --> C(receive card from black_list in MySQL, then filter the data if card is not in  the black_list and the amount >=20,000 and transaction_type ==00) --> D("map the filtered data to ((day, card, advertise_id),1)  and then reduce them to count the total number of clicks of each advertise_id by each card in each day")
+    A(receive data from Kafka) -->B(transform the data to DStream and parse the data to a case class) --> C(receive card from black_list in MySQL, then filter the data if card is not in  the black_list and the amount >=20,000 and transaction_type ==00) --> D("map the filtered data to ((day, card, merchant_id),1)  and then reduce them to count the total number of clicks of each merchant_id by each card in each day")
     D --> E{"counted total number >= Threshod? "}
     E -->|yes|F(insert or update the blacklist databse)
-    E -->|No|G(update or insert the user_ad_count database)
+    E -->|No|G(update or insert the historical_card_merchant_counted database)
     G --> H{"updated counted total number >=Threshold? "}
     H -->|yes|I(insert or update the black_list databse)
    
@@ -33,7 +33,7 @@ flowchart TB
     2. transform the data to DStream and parse the data to a case class
     3. select card from black_list, then filter the data if card is not in the black_list and the amount >=20,000 and the transaction_typs is "00"(means: a consumption type transaction)
     4. map the filtered data to ((day, card, merchant_id),1)  and then reduce them to count the total number
-     of clicks to each advertise_id by each card in each day.
+     of clicks to each merchant_id by each card in each day.
     5. if counted_total_number >20 then insert or update the card into the blacklist.
     6. if counted_total_number <=20, then update or insert into the historical_card_merchant_counted ,
     if finding the updated total_number in the history_user_ad_count >20, then insert or update the card into  black_list

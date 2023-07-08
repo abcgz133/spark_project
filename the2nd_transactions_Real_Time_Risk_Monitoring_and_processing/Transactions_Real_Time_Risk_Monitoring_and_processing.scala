@@ -1,4 +1,4 @@
-package sparkProject.the2nd_transactions_Real_Time_Risk_Monitoring_and_processing
+package creditcard_sparkProject.the2nd_transactions_Real_Time_Risk_Monitoring_and_processing
 
 import org.apache.kafka.clients.consumer.{ConsumerConfig, ConsumerRecord}
 import org.apache.spark.SparkConf
@@ -6,13 +6,12 @@ import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.{DStream, InputDStream}
 import org.apache.spark.streaming.kafka010.{ConsumerStrategies, KafkaUtils, LocationStrategies}
 import org.apache.spark.streaming.{Seconds, StreamingContext}
-import util.JDBCUtil
 
 import java.sql.{PreparedStatement, ResultSet}
 import java.text.SimpleDateFormat
 import java.util.Date
 import scala.collection.mutable.ListBuffer
-
+import util.JDBCUtil
 object Transactions_Real_Time_Risk_Monitoring_and_processing {
   /*
     1. receive data from Kafka,

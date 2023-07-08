@@ -1,4 +1,4 @@
-package creditcard_sparkProject.best10_Clicking_Booking_Paying.Best10_Clicking_Booking_Paying_By_Accumulator
+package creditcard_sparkProject.the4th_other_projects.best10_Clicking_Booking_Paying.By_Accumulator
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.util.AccumulatorV2

@@ -1,9 +1,9 @@
-package creditcard_sparkProject.best10_Clicking_Booking_Paying.Best10_Clicking_Booking_Paying_number_By_New_Tuple_type
+package creditcard_sparkProject.the4th_other_projects.best10_Clicking_Booking_Paying.By_New_Tuple_type
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.{SparkConf, SparkContext}
 
-object Best10_Clicking_Booking_Paying_number_By_New_Tuple_type {
+object By_New_Tuple_type {
   /*
     1. connect to Spark
     2. filter and map the data to New_tuple_type
