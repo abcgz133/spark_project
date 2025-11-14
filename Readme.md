@@ -1,11 +1,11 @@
 ![avatar](./images/Trend_payment.png)
-## 1.Functions of this credit card sparkProject
-System includes these analysis functions:
-1. "Trend_Payment_type_From_Kafka"--- By using Spark Streaming, it analyzes the transaction payment trend dynamically in each 10 seconds by Spark Streaming. It can receive the Kafka flowing data in each 10 seconds and accumulate the transaction number. Secondly, it can show the trend of 3 different payment types(01--Alipay, 02--WeChat pay, 03--other payments) and the total number of payment transaction in each day in a BI tool(FineBI) graphically  and intuitively.
-2. "Transactions_Real_Time_Risk_Monitoring_and_processing"---A transaction risk monitor and control system. System can receive the flow data from the Consumer of Kafka. It then monitors and accumulates the number of times that one credit card being used in one merchant in each day. If the number of times is greater than a threshold (for example, 20 times), then the card will be added to the blacklist on MySQL.
-3. "Card_type_Best_market_share_ratio_in_Branches"---Listing the top 3 total transaction number of credit card types and ranking in each Chinese areas, importantly, also listing the market share proportion and ranking of these card types in different branches.
-4. "Others"---including other market business analysis. such as counting the user page-clicking conversion rate in internet(counting each page to the adjacent page) and listing the top 50 with the highest conversion rate, etc.
+## 1. Overview
+This Spark-based analytics platform supports multiple credit card intelligence use cases across real-time monitoring, risk control, and strategic planning. It includes three core modules:  
+(1) **Trend_Payment_Type_From_Kafka**, which uses Spark Streaming to consume transaction data from Kafka every 10 seconds, aggregates volumes by payment type (Alipay, WeChat Pay, Others), and visualizes daily trends in FineBI for dynamic payment behavior tracking;  
+(2) **Transactions_Real_Time_Risk_Monitoring_and_Processing**, a streaming fraud detection system that monitors per-card transaction frequency at each merchant and automatically adds suspicious cards to a MySQL blacklist when thresholds are exceeded;  
+(3) **Regional_Card_Performance_Analysis**, which leverages Spark SQL and a custom UDAF to rank the top 3 credit card types by transaction count in each Chinese region and reveal their acquiring channel concentration—for example, “60% of transactions acquired through Shanghai Branch.”  
 
+Together, these modules provide **real-time payment visibility**, **automated risk control**, and **data-driven regional insights**.
 
 ## 2. Result of these functions(partial):
 (1) Trend_Payment_type_From_Kafka
