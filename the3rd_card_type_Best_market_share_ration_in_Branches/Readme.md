@@ -1,8 +1,17 @@
 card_type_Best_market_share_ration_in_Branches.scala
 
-## 1.functions of this system.
-Listing the top 3 total transaction number of credit card types and ranking in each Chinese areas, importantly, also listing the market share proportion and ranking of these card types in different branches under respectively areas.
-The most complicated thing is that the spark SQL can not only list the corresponding city branches name in each area group, but can also use UDAF method to compute the market share proportion and ranking.
+## 1.System Functionality
+
+This system leverages Spark SQL and a custom User-Defined Aggregation Function (UDAF) to deliver actionable regional insights into credit card performance:
+
+- **Top Card Identification**: For each major region in China (e.g., East China, South China), it identifies the top 3 credit card types by total transaction count and ranks them accordingly.
+- **Acquiring Channel Breakdown**: For each of these top-performing cards, it further shows the transaction concentration across acquiring branches within the region — for example, “Standardized VISA ranks #1 in East China, with 60% of its transactions acquired through Shanghai Branch and 25% through Hangzhou Branch.”
+
+The key technical component is a custom UDAF that, within each (region, card type) group:
+- Aggregates transaction counts by acquiring city (e.g., Shanghai, Hangzhou);
+- Computes market share percentages (as integers) for the top two cities;
+- Returns a summary like "Shanghai:60%, Hangzhou:25%, 3rd:15%".
+Combined with Spark SQL window functions for regional ranking, the system delivers end-to-end insights—from top cards to their key acquiring channels—in a scalable pipeline.
 
 ## 2.Why using the SparkSQL?
 
